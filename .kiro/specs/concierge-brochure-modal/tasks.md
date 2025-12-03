@@ -1,0 +1,103 @@
+# Implementation Plan
+
+- [x] 1. Create modal context and provider
+  - [x] 1.1 Create BrochureModalContext with open/close state management
+    - Create `contexts/BrochureModalContext.js` with isOpen state, openModal/closeModal functions, and triggerRef tracking
+    - Export BrochureModalProvider and useBrochureModal hook
+    - _Requirements: 1.1, 5.3_
+  - [x] 1.2 Integrate provider into app layout
+    - Modify `app/providers/index.js` to include BrochureModalProvider
+    - Ensure provider wraps the entire application
+    - _Requirements: 1.1_
+
+- [x] 2. Implement core modal component
+  - [x] 2.1 Create BrochureModal base component with overlay
+    - Create `components/BrochureModal/BrochureModal.js`
+    - Implement full-screen backdrop with semi-transparent white overlay and blur
+    - Add Framer Motion fade-in/fade-out animations (300ms in, 200ms out)
+    - _Requirements: 2.1, 2.2, 2.4_
+  - [x] 2.2 Implement modal accessibility features
+    - Add ARIA attributes (role="dialog", aria-modal, aria-labelledby)
+    - Implement focus trap to keep focus within modal
+    - Add scroll lock when modal is open
+    - Handle Escape key to close modal
+    - Return focus to trigger element on close
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [x] 2.3 Add close button and backdrop click handling
+    - Add close button (×) in top-right corner with 48x48px touch target
+    - Implement backdrop click to close
+    - _Requirements: 2.3, 6.1, 6.2, 6.3_
+  - [ ]* 2.4 Write unit tests for modal open/close behavior
+    - Test modal renders when isOpen is true
+    - Test Escape key closes modal
+    - Test backdrop click closes modal
+    - _Requirements: 5.3, 6.1, 6.2_
+
+- [x] 3. Implement brochure request form
+  - [x] 3.1 Create BrochureForm component with form fields
+    - Create `components/BrochureModal/BrochureForm.js`
+    - Add required fields: fullName, email, phone
+    - Add optional fields: eventType (dropdown), message (textarea)
+    - Style with Tailwind matching design specs
+    - _Requirements: 3.1, 3.2, 3.3_
+  - [x] 3.2 Implement form validation logic
+    - Validate fullName (required, min 2 chars)
+    - Validate email (required, valid format)
+    - Validate phone (required, 10 digits with optional +91 prefix)
+    - Display inline error messages below invalid fields
+    - _Requirements: 3.4, 3.5, 3.6_
+  - [x] 3.3 Implement form submission handling
+    - Add loading state with disabled submit button
+    - Handle successful submission (transition to success state)
+    - Handle error state with retry option
+    - _Requirements: 4.1, 4.2, 4.3, 4.5_
+  - [ ]* 3.4 Write unit tests for form validation
+    - Test email validation accepts valid formats
+    - Test phone validation accepts Indian formats
+    - Test required field validation
+    - _Requirements: 3.4, 3.5, 3.6_
+
+- [x] 4. Create success state component
+  - [x] 4.1 Create BrochureSuccess component
+    - Create `components/BrochureModal/BrochureSuccess.js`
+    - Display confirmation message with elegant typography
+    - Add close button
+    - Implement 3-second auto-close timer
+    - _Requirements: 4.2, 4.4_
+
+- [x] 5. Create reusable modal trigger component
+  - [x] 5.1 Create BrochureModalTrigger component
+    - Create `components/BrochureModalTrigger.js`
+    - Support variants: primary, secondary, text
+    - Ensure 48x48px minimum touch target
+    - Register trigger ref for focus return
+    - _Requirements: 1.2, 1.3, 1.4_
+
+- [x] 6. Integrate triggers into existing components
+  - [x] 6.1 Add trigger to Header component
+    - Modify `components/Header.js` to include BrochureModalTrigger
+    - Style to match existing navigation
+    - Add to both desktop and mobile navigation
+    - _Requirements: 1.2_
+  - [x] 6.2 Add trigger to Contact section
+    - Modify `components/Contact.js` to include BrochureModalTrigger
+    - Position appropriately within contact information card
+    - _Requirements: 1.2_
+  - [x] 6.3 Add trigger to Footer component
+    - Modify `components/Footer.js` to include BrochureModalTrigger
+    - Add to Quick Links section
+    - _Requirements: 1.2_
+
+- [x] 7. Implement responsive design
+  - [x] 7.1 Add responsive styles to modal and form
+    - Full-screen modal on mobile (below 768px)
+    - Constrained width (500px max) on tablet/desktop
+    - Ensure form fields stack vertically with consistent spacing
+    - Test across viewport widths 320px to 1920px
+    - _Requirements: 7.1, 7.2, 7.3, 7.4_
+
+- [ ] 8. Render modal in layout
+  - [x] 8.1 Add BrochureModal to app layout
+    - Import and render BrochureModal in `app/layout.js` or providers
+    - Ensure modal renders at root level for proper z-index stacking
+    - _Requirements: 1.1, 2.1_

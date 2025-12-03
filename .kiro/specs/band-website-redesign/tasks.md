@@ -1,0 +1,157 @@
+# Implementation Plan
+
+- [x] 1. Set up new theme and global styles
+  - [x] 1.1 Update globals.css with dark theme color system
+    - Replace current color variables with band theme (black, white, red accent)
+    - Update typography settings for bold headings and clean body text
+    - Add new utility classes for dark theme components
+    - _Requirements: 10.1, 10.2_
+  - [x] 1.2 Update app/layout.js metadata and fonts
+    - Change site title and description to band information
+    - Update Open Graph and Twitter meta tags
+    - Replace schema.org markup with MusicGroup schema
+    - _Requirements: 11.1, 11.5_
+
+- [x] 2. Create data files for content
+  - [x] 2.1 Create releases data file
+    - Create `data/releases.js` with sample album, EP, and single entries
+    - Include cover images, tracklists, and streaming links
+    - _Requirements: 4.1, 4.2, 4.3_
+  - [x] 2.2 Create shows data file
+    - Create `data/shows.js` with upcoming and past shows arrays
+    - Include date, city, venue, and ticket URLs
+    - _Requirements: 5.1, 5.2, 5.4_
+  - [x] 2.3 Create members and news data files
+    - Create `data/members.js` with band member profiles
+    - Create `data/news.js` with latest announcements
+    - _Requirements: 6.1, 6.2, 2.1_
+
+- [x] 3. Build new layout components
+  - [x] 3.1 Rebuild Header component for band navigation
+    - Create dark transparent header with glass effect on scroll
+    - Add navigation links: Home, Music, Tour, About, Contact
+    - Add external Merch link opening in new tab
+    - Implement mobile hamburger menu with slide-out drawer
+    - _Requirements: 9.1, 9.2, 7.1, 7.2, 7.3_
+  - [x] 3.2 Rebuild Footer component with social links
+    - Add social media icon links (Spotify, Instagram, YouTube, TikTok, Facebook)
+    - Add copyright notice with band name and current year
+    - Add Privacy Policy link
+    - _Requirements: 9.3, 9.4, 9.5_
+
+- [x] 4. Build homepage components
+  - [x] 4.1 Create Hero component
+    - Build full-screen hero with background image and dark overlay
+    - Add band name with bold uppercase typography
+    - Add primary CTA button with hover animation
+    - Add scroll indicator at bottom
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [x] 4.2 Create NewsStrip component
+    - Build announcement section with headline and description
+    - Add link to full content
+    - Make content configurable from data file
+    - _Requirements: 2.1, 2.2, 2.3, 2.4_
+  - [x] 4.3 Create UpcomingShows component
+    - Display next 3 shows from data
+    - Show date, city, venue for each
+    - Add ticket links and "View All" link to Tour page
+    - Handle empty state when no shows scheduled
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+  - [x] 4.4 Assemble homepage
+    - Update `app/page.js` to use new homepage components
+    - Remove all Imperial Garden components
+    - Add page animations with Framer Motion
+    - _Requirements: 1.1, 2.1, 3.1_
+
+- [x] 5. Build Music/Discography page
+  - [x] 5.1 Create ReleaseCard component
+    - Display cover art with hover zoom effect
+    - Show release title, type badge, and year
+    - Display numbered tracklist
+    - Add embedded Spotify/Apple Music player
+    - Add buy/download links
+    - _Requirements: 4.2, 4.3, 4.4, 4.5_
+  - [x] 5.2 Create Music page
+    - Create `app/music/page.js`
+    - Organize releases by type (Albums, EPs, Singles)
+    - Import and display releases from data file
+    - Add page metadata for SEO
+    - _Requirements: 4.1, 4.6, 11.1_
+
+- [x] 6. Build Tour page
+  - [x] 6.1 Create ShowCard component
+    - Display date prominently with accent color
+    - Show city and venue name
+    - Add "Get Tickets" button linking to external URL
+    - Show "Sold Out" badge when applicable
+    - _Requirements: 5.2, 5.3_
+  - [x] 6.2 Create Tour page with upcoming and past shows
+    - Create `app/tour/page.js`
+    - Display upcoming shows sorted chronologically
+    - Add Past Shows section below
+    - Handle empty states
+    - Add page metadata for SEO
+    - _Requirements: 5.1, 5.4, 5.6, 11.1_
+
+- [x] 7. Build About page
+  - [x] 7.1 Create BandBio and MemberCard components
+    - Create BandBio component for band story
+    - Create MemberCard with photo, name, and role
+    - Style with dark theme
+    - _Requirements: 6.1, 6.2_
+  - [x] 7.2 Create PressKit component
+    - Display downloadable press photos
+    - Add clear media usage label
+    - _Requirements: 6.3, 6.4_
+  - [x] 7.3 Create About page
+    - Create `app/about/page.js`
+    - Assemble bio, members grid, and press kit sections
+    - Add page metadata for SEO
+    - _Requirements: 6.5, 11.1_
+
+- [x] 8. Build Contact page
+  - [x] 8.1 Create ContactForm component
+    - Add fields for name, email, and message
+    - Implement client-side validation
+    - Show success confirmation on submit
+    - _Requirements: 8.1, 8.3_
+  - [x] 8.2 Create Contact page with form and press contacts
+    - Create `app/contact/page.js`
+    - Display contact form
+    - Show separate email addresses for Press and Booking
+    - Add page metadata for SEO
+    - _Requirements: 8.2, 8.4, 11.1_
+
+- [x] 9. Create Privacy Policy page
+  - [x] 9.1 Create Privacy Policy page
+    - Create `app/privacy/page.js`
+    - Add basic privacy policy content
+    - Style consistently with site theme
+    - _Requirements: 11.4_
+
+- [x] 10. Clean up and remove old components
+  - [x] 10.1 Remove Imperial Garden specific files
+    - Delete unused components (About.js, Services.js, Packages.js, Gallery.js, etc.)
+    - Remove old data and content references
+    - Clean up unused imports
+    - _Requirements: N/A (cleanup)_
+
+- [x] 11. Add placeholder images
+  - [x] 11.1 Add placeholder images for band content
+    - Add hero background image placeholder
+    - Add release cover art placeholders
+    - Add member photo placeholders
+    - Add press kit photo placeholders
+    - _Requirements: 10.5, 11.3_
+
+- [x] 12. Final responsive and accessibility pass
+  - [x] 12.1 Verify responsive design across breakpoints
+    - Test at 320px, 768px, 1024px, 1440px viewports
+    - Ensure touch targets are minimum 48x48px
+    - Verify all layouts work on mobile
+    - _Requirements: 10.1, 10.3, 10.4_
+  - [x] 12.2 Run accessibility audit
+    - Check keyboard navigation on all pages
+    - Verify color contrast ratios
+    - Ensure all images have alt text
+    - _Requirements: 10.3, 11.3_
